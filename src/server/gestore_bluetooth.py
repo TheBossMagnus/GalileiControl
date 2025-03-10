@@ -1,11 +1,13 @@
-import bluetooth
 import threading
+
+import bluetooth
+
 from config import (
-    DIMENSIONE_BUFFER,
-    TIMEOUT,
     BLUETOOTH_DEVICE_NAME,
     BLUETOOTH_UUID,
+    DIMENSIONE_BUFFER,
     MAX_CONNECTIONS,
+    TIMEOUT,
 )
 
 # Variabili globali
