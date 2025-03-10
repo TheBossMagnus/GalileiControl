@@ -1,6 +1,12 @@
 import bluetooth
 import threading
-from config import DIMENSIONE_BUFFER, TIMEOUT, BLUETOOTH_DEVICE_NAME, BLUETOOTH_UUID, MAX_CONNECTIONS
+from config import (
+    DIMENSIONE_BUFFER,
+    TIMEOUT,
+    BLUETOOTH_DEVICE_NAME,
+    BLUETOOTH_UUID,
+    MAX_CONNECTIONS,
+)
 
 # Variabili globali
 connessioni = []
@@ -20,7 +26,13 @@ def avvia_server():
     porta = socket_server.getsockname()[1]
 
     # Pubblicizza il servizio
-    bluetooth.advertise_service(socket_server, BLUETOOTH_DEVICE_NAME, service_id=BLUETOOTH_UUID, service_classes=[BLUETOOTH_UUID, bluetooth.SERIAL_PORT_CLASS], profiles=[bluetooth.SERIAL_PORT_PROFILE])
+    bluetooth.advertise_service(
+        socket_server,
+        BLUETOOTH_DEVICE_NAME,
+        service_id=BLUETOOTH_UUID,
+        service_classes=[BLUETOOTH_UUID, bluetooth.SERIAL_PORT_CLASS],
+        profiles=[bluetooth.SERIAL_PORT_PROFILE],
+    )
 
     print(f"Server Bluetooth '{BLUETOOTH_DEVICE_NAME}' avviato su RFCOMM {porta}")
     print("Premi Ctrl+C per fermare il server")
@@ -31,7 +43,9 @@ def avvia_server():
         while in_esecuzione:
             # Accetta e gestisci connessioni
             socket_client, info_client = socket_server.accept()
-            thread = threading.Thread(target=gestisci_client, args=(socket_client, info_client))
+            thread = threading.Thread(
+                target=gestisci_client, args=(socket_client, info_client)
+            )
             thread.daemon = True
             thread.start()
     except KeyboardInterrupt:
@@ -55,7 +69,11 @@ def gestisci_client(socket_client, info_client):
                 if dati:
                     elabora_dati(dati.decode("utf-8"), info_client)
             except bluetooth.btcommon.BluetoothError as e:
-                if "timed out" not in str(e):
+                if "timed out" in str(e):
+                    print(f"Timeout client {info_client}")
+                    break
+                else:
+
                     print(f"Errore Bluetooth: {e}")
                     break
     finally:
@@ -63,7 +81,9 @@ def gestisci_client(socket_client, info_client):
             if socket_client in connessioni:
                 connessioni.remove(socket_client)
         socket_client.close()
-        print(f"Client {info_client} disconnesso. Clienti rimanenti: {len(connessioni)}")
+        print(
+            f"Client {info_client} disconnesso. Clienti rimanenti: {len(connessioni)}"
+        )
 
 
 def elabora_dati(dati, info_client):
@@ -82,10 +102,9 @@ def chiudi_tutto():
         for conn in connessioni[:]:
             try:
                 conn.close()
-            except:
+            except Exception:
                 pass
         connessioni.clear()
 
     if socket_server:
         socket_server.close()
-        socket_server = None
