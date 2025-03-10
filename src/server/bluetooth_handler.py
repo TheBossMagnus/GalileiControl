@@ -1,55 +1,58 @@
 import bluetooth
 import threading
-from config import BUFFER_SIZE, TIMEOUT
+from config import DIMENSIONE_BUFFER, TIMEOUT
 
-# Global variables
-connections = []
-connection_lock = threading.Lock()
-running = True
+# Variabili globali
+connessioni = []
+blocco_connessione = threading.Lock()
+in_esecuzione = True
 
-def client_thread(client_socket, client_info):
-    """Thread function to handle communication with a client"""
+
+def thread_client(socket_client, info_client):
+    """Funzione del thread per gestire la comunicazione con un client"""
     try:
-        with connection_lock:
-            connections.append(client_socket)
-        
-        print(f"Client {client_info} connected. Total clients: {len(connections)}")
-        
-        client_socket.settimeout(TIMEOUT)
-        while running:
+        with blocco_connessione:
+            connessioni.append(socket_client)
+
+        print(f"client {info_client} connesso. Clienti totali: {len(connessioni)}")
+
+        socket_client.settimeout(TIMEOUT)
+        while in_esecuzione:
             try:
-                data = client_socket.recv(BUFFER_SIZE)
-                if not data:
-                    break  # Client disconnected
-                
-                # Process received data
-                message = data.decode('utf-8')
-                process_data(message, client_info)
-                
+                dati = socket_client.recv(DIMENSIONE_BUFFER)
+                if not dati:
+                    break  # client disconnesso
+
+                # Elabora i dati ricevuti
+                messaggio = dati.decode("utf-8")
+                elabora_dati(messaggio, info_client)
+
             except bluetooth.btcommon.BluetoothError as e:
-                if "timed out" not in str(e):  # Ignore timeout errors
-                    print(f"Bluetooth error with client {client_info}: {e}")
+                if "timed out" not in str(e):  # Ignora gli errori di timeout
+                    print(f"Errore Bluetooth con il client {info_client}: {e}")
                     break
             except Exception as e:
-                print(f"Error with client {client_info}: {e}")
+                print(f"Errore con il client {info_client}: {e}")
                 break
-    
-    finally:
-        # Clean up when client disconnects
-        with connection_lock:
-            if client_socket in connections:
-                connections.remove(client_socket)
-        client_socket.close()
-        print(f"Client {client_info} disconnected. Remaining clients: {len(connections)}")
 
-def handle_connection(client_socket, client_info):
-    """Start a new thread to handle a client connection"""
-    thread = threading.Thread(target=client_thread, args=(client_socket, client_info))
+    finally:
+        # Pulisci quando il client si disconnette
+        with blocco_connessione:
+            if socket_client in connessioni:
+                connessioni.remove(socket_client)
+        socket_client.close()
+        print(f"client {info_client} disconnesso. Clienti rimanenti: {len(connessioni)}")
+
+
+def gestisci_connessione(socket_client, info_client):
+    """Avvia un nuovo thread per gestire una connessione client"""
+    thread = threading.Thread(target=thread_client, args=(socket_client, info_client))
     thread.daemon = True
     thread.start()
 
-def process_data(data, client_info):
-    """Process data received from a client"""
-    print(f"Data from {client_info}: {data}")
-    # Add your data processing logic here
-    # For example, you could save to a database, trigger
+
+def elabora_dati(dati, info_client):
+    """Elabora i dati ricevuti da un client"""
+    print(f"Dati da {info_client}: {dati}")
+    # Aggiungi qui la tua logica di elaborazione dati
+    # Per esempio, potresti salvare su un database, attivare
