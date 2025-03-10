@@ -20,7 +20,7 @@ def initialize_server():
     """Initialize the Bluetooth server socket"""
     global server_socket
     server_socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-    server_socket.bind(("", bluetooth.PORT_ANY))
+    server_socket.bind(("", 3))
     server_socket.listen(MAX_CONNECTIONS)
     
     port = server_socket.getsockname()[1]
