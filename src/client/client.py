@@ -15,7 +15,7 @@ try:
     while True:
         time.sleep(5)
         message = f'User: {get_data.get_logged_in_user()}\nRam: {get_data.get_ram_usage()}%\nInternet: {get_data.is_connected_to_internet()},\nCPU Temp: {get_data.get_cpu_temperature()}'
-        s.send(message)
+        s.send(message.encode())
 
     
 except Exception as e:
