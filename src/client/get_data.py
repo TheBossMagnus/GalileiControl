@@ -1,6 +1,17 @@
 import os
 import psutil
 import requests
+import socket
+
+
+def organizza_dati():
+    data = {"hostname": get_hostname(),
+            "username": get_logged_in_user(), 
+            "info": {"cpu_temperature": get_cpu_temperature(), "internet_connection": is_connected_to_internet(), "ram_usage": get_ram_usage()}}
+    return data
+
+def get_hostname():
+    return socket.gethostname()
 
 
 def get_logged_in_user():
