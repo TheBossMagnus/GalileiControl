@@ -89,25 +89,25 @@ def gestisci_client(socket_client, info_client):
 def elabora_dati(dati, info_client):
     """Elabora i dati ricevuti dal client e li salva in formato JSON"""
 
+    hostname = dati["hostname"]
+
     # Log i dati ricevuti
     with open("log.txt", "a") as file:
         ora = time.strftime("%Y-%m-%d %H:%M:%S")
-        file.write(f"[{ora}] {info_client}: {dati}\n")
+        file.write(f"[{ora}] {hostname}: {dati}\n")
 
     dati = json.loads(dati)
-    hostnameNuoviDati = dati["hostname"]
-    # Leggi il database esistente
+
+    # Carica il database
     with open("database.json", "r") as file:
-        database = json.loads(file.read())
-    if hostnameNuoviDati in database:  # Controlla se il dispositivo esiste già nel database, aggiorna i dati
-        database["dispositivi"][hostnameNuoviDati] = dati.get("data", {})
-    else:
-        # Aggiungi un nuovo dispositivo al database
-        file.append(dati.json())
+        database = json.load(file)
+
+    # Aggiorna o aggiungi i dati del dispositivo
+    database["dispositivi"][hostname] = dati.get("data", {})
 
     # Salva il database aggiornato
     with open("database.json", "w") as file:
-        file.write(json.dumps(database))
+        json.dump(database, file)
 
 
 def chiudi_tutto():
