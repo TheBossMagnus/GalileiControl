@@ -4,7 +4,7 @@ import bluetooth
 import json
 import os
 
-from config import (
+from server.backend.config import (
     NOME_DISPOSITIVO_BLUETOOTH,
     UUID_BLUETOOTH,
     DIMENSIONE_BUFFER,
