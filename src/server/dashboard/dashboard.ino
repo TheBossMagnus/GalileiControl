@@ -1,7 +1,12 @@
-const int ledPins[3][3] = {
-    {3, 4, 5}, // LED  0
-    {6, 7, 8}, // LED  1
-    {9, 10, 11} // LED  2
+//const int ledPins[3][3] = {
+//    {3, 4, 5}, // LED  0
+//    {6, 7, 8}, // LED  1
+//    {9, 10, 11} // LED  2
+//};
+
+const int ledPins[2][3] = {
+    {3, 5, 6}, // LED 0
+    {9, 10, 11} // LED 1
 };
 
 void setup() {
