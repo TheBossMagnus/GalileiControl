@@ -25,10 +25,12 @@ def send_serial_string(string_data):
 
 if __name__ == "__main__":
 
-    test_string = "T\n"   
-    send_serial_string(test_string)
-    time.sleep(5)
-    test_string = "F\n"   
-    send_serial_string(test_string)
+    while True:
+        test_string = "T\n"   
+        send_serial_string(test_string)
+        time.sleep(5)
+        test_string = "F\n"   
+        send_serial_string(test_string)
+        time.sleep(5)
 
     

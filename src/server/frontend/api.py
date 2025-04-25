@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 
 def carica_database():
-    with open("database.json", "r") as file:
+    with open(r"/home/tbmag/code/telecomunicazioni/Raspberry/raspberry-pi-bluetooth-server/database.json", "r") as file:
         return json.load(file)
 
 
