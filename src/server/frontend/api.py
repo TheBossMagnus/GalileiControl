@@ -9,15 +9,17 @@ def carica_database():
         return json.load(file)
 
 
-@app.route("/api/dispositivi", methods=["GET"])
-def ottieni_dispositivi():
-    """Restituisce l'elenco di tutti i dispositivi"""
+@app.route("/api/dispositivi/nomi", methods=["GET"])
+def ottieni_nomi_dispositivi():
+    """Restituisce solo i nomi (hostname) di tutti i dispositivi"""
     database = carica_database()
 
     if "dispositivi" not in database:
         return jsonify({"errore": "Formato database non valido"}), 500
 
-    return jsonify(database["dispositivi"])
+    nomi_dispositivi = list(database["dispositivi"].keys())
+    return jsonify(nomi_dispositivi)
+
 
 
 @app.route("/api/dispositivi/<hostname>", methods=["GET"])
