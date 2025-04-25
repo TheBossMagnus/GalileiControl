@@ -14,8 +14,8 @@ try:
 
     while True:
         time.sleep(5)
-        socket.send(organizza_dati.encode())
-
+        data_to_send = organizza_dati()
+        socket.send(data_to_send.encode())
 
 except Exception as e:
     print(f"Errore: {e}")
