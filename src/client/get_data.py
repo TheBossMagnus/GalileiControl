@@ -3,6 +3,7 @@ import psutil
 import requests
 import socket
 import json
+import WinTmp
 
 
 def organizza_dati():
@@ -20,7 +21,7 @@ def get_logged_in_user():
 
 
 def get_cpu_temperature():
-    return "TBD"
+    return WinTmp.CPU_Temp()
 
 
 def is_connected_to_internet():
