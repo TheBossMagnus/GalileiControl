@@ -1,11 +1,14 @@
-from flask import Flask, jsonify
 import json
+
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 
 def carica_database():
-    with open(r"/home/tbmag/code/telecomunicazioni/Raspberry/raspberry-pi-bluetooth-server/database.json", "r") as file:
+    with open(
+        r"/home/tbmag/code/telecomunicazioni/Raspberry/raspberry-pi-bluetooth-server/database.json",
+    ) as file:
         return json.load(file)
 
 
@@ -19,7 +22,6 @@ def ottieni_nomi_dispositivi():
 
     nomi_dispositivi = list(database["dispositivi"].keys())
     return jsonify(nomi_dispositivi)
-
 
 
 @app.route("/api/dispositivi/<hostname>", methods=["GET"])
@@ -41,9 +43,9 @@ def test():
     database = carica_database()
     if database is not None:
         return jsonify({"messaggio": "Api funzionante"}), 200
-    else:
-        return jsonify({"errore": "Errore nel caricamento del database"}), 500
-    
+    return jsonify({"errore": "Errore nel caricamento del database"}), 500
+
+
 @app.route("/api/status", methods=["GET"])
 def status():
     """REstituisci se un dispositivo è in situazione critica"""
@@ -52,6 +54,7 @@ def status():
         if device.get("internet_connection") is False:
             return jsonify({"status": "true"}), 200
         return jsonify({"status": "false"}), 200
+    return None
 
 
 if __name__ == "__main__":

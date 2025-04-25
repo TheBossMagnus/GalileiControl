@@ -1,7 +1,7 @@
-import gestore_bluetooth as gestore_bluetooth
+import gestore_bluetooth
 
 
-def main():
+def main() -> None:
     """Funzione principale che avvia il server Bluetooth"""
     try:
         # Avvia il server Bluetooth (delegato al gestore)

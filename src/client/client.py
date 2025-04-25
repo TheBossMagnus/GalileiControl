@@ -1,5 +1,6 @@
 import socket
 import time
+
 from get_data import organizza_dati
 
 server_addr = "2C:CF:67:99:D4:0E"
