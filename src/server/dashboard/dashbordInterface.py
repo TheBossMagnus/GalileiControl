@@ -4,7 +4,7 @@ import requests
 import serial
 
 
-def send_serial_string(string_data) -> None:
+def invia_stringa_seriale(dati_stringa) -> None:
     ser = serial.Serial(
         port="/dev/ttyUSB0",
         baudrate=9600,
@@ -17,25 +17,25 @@ def send_serial_string(string_data) -> None:
     if not ser.is_open:
         ser.open()
 
-    # Convert string to bytes if needed
-    data_bytes = string_data.encode("utf-8")
-    ser.write(data_bytes)
+    # Converte stringa in bytes se necessario
+    dati_bytes = dati_stringa.encode("utf-8")
+    ser.write(dati_bytes)
 
-    # Close the connection
+    # Chiude la connessione
     ser.close()
 
 
 if __name__ == "__main__":
-    api_url = "http://localhost:5000/api/status"
+    url_api = "http://localhost:5000/api/status"
 
     while True:
-        response = requests.get(api_url)
+        risposta = requests.get(url_api)
 
-        data = response.json()
-        status = data.get("status")
-        if status == "true":
-            send_serial_string("T\n")
-        elif status == "false":
-            send_serial_string("F\n")
+        dati = risposta.json()
+        stato = dati.get("status")
+        if stato == "true":
+            invia_stringa_seriale("T\n")
+        elif stato == "false":
+            invia_stringa_seriale("F\n")
 
         time.sleep(30)

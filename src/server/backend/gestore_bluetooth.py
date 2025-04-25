@@ -47,7 +47,8 @@ def avvia_server() -> None:
             # Accetta e gestisci connessioni
             socket_client, info_client = socket_server.accept()
             thread = threading.Thread(
-                target=gestisci_client, args=(socket_client, info_client),
+                target=gestisci_client,
+                args=(socket_client, info_client),
             )
             thread.daemon = True
             thread.start()

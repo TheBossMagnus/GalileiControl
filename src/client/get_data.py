@@ -9,29 +9,29 @@ import WinTmp
 
 
 def organizza_dati():
-    # Return all data directly without nesting under 'info'
-    data = {
-        "username": get_logged_in_user(),
-        "cpu_temperature": get_cpu_temperature(),
-        "internet_connection": is_connected_to_internet(),
-        "ram_usage": get_ram_usage(),
+    # Restituisce tutti i dati direttamente senza nidificarli sotto 'info'
+    dati = {
+        "nome_utente": get_utente_connesso(),
+        "temperatura_cpu": get_temperatura_cpu(),
+        "connessione_internet": è_connesso_a_internet(),
+        "uso_ram": get_uso_ram(),
     }
-    return json.dumps({"hostname": get_hostname(), "data": data})
+    return json.dumps({"nome_host": get_nome_host(), "dati": dati})
 
 
-def get_hostname():
+def get_nome_host():
     return socket.gethostname()
 
 
-def get_logged_in_user():
+def get_utente_connesso():
     return os.getlogin()
 
 
-def get_cpu_temperature():
+def get_temperatura_cpu():
     return WinTmp.CPU_Temp()
 
 
-def is_connected_to_internet() -> Optional[bool]:
+def è_connesso_a_internet() -> Optional[bool]:
     try:
         requests.get("http://www.google.com", timeout=5)
         return True
@@ -39,6 +39,6 @@ def is_connected_to_internet() -> Optional[bool]:
         return False
 
 
-def get_ram_usage():
-    memory_info = psutil.virtual_memory()
-    return memory_info.percent
+def get_uso_ram():
+    informazioni_memoria = psutil.virtual_memory()
+    return informazioni_memoria.percent

@@ -47,13 +47,13 @@ def test():
 
 
 @app.route("/api/status", methods=["GET"])
-def status():
-    """REstituisci se un dispositivo è in situazione critica"""
+def stato():
+    """Restituisce se un dispositivo è in situazione critica"""
     database = carica_database()
-    for device in database["dispositivi"].items():
-        if device.get("internet_connection") is False:
-            return jsonify({"status": "true"}), 200
-        return jsonify({"status": "false"}), 200
+    for dispositivo in database["dispositivi"].items():
+        if dispositivo.get("connessione_internet") is False:
+            return jsonify({"stato": "true"}), 200
+        return jsonify({"stato": "false"}), 200
     return None
 
 
