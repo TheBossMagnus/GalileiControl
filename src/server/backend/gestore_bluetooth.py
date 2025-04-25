@@ -94,7 +94,7 @@ def elabora_dati(dati, info_client):
     hostname = dati_json.get("hostname", str(info_client[0]))
     
     # Carica il database
-    with open("database.json", "r") as file:
+    with open(r"/home/tbmag/code/telecomunicazioni/Raspberry/raspberry-pi-bluetooth-server/database.json", "r") as file:
         database = json.load(file)
     
     # Aggiorna o aggiungi i dati del dispositivo
@@ -103,7 +103,7 @@ def elabora_dati(dati, info_client):
 
     
     # Salva il database aggiornato
-    with open("database.json", "w") as file:
+    with open(r"/home/tbmag/code/telecomunicazioni/Raspberry/raspberry-pi-bluetooth-server/database.json", "w") as file:
         json.dump(database, file, indent=2)
         
     print(f"Dati salvati per il dispositivo: {hostname} ({info_client[0]})")
