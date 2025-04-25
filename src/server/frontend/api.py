@@ -48,10 +48,10 @@ def test():
 def status():
     """REstituisci se un dispositivo è in situazione critica"""
     database = carica_database()
-    for hostname, device in database["dispositivi"].items():
+    for device in database["dispositivi"].items():
         if device.get("internet_connection") is False:
-            return jsonify({"hostname": hostname, "status": "true"}), 200
-        return jsonify({"hostname": hostname, "status": "false"}), 200
+            return jsonify({"status": "true"}), 200
+        return jsonify({"status": "false"}), 200
 
 
 if __name__ == "__main__":

@@ -1,5 +1,7 @@
 import serial
 import time
+import requests 
+import json 
 
 def send_serial_string(string_data):
     ser = serial.Serial(
@@ -24,13 +26,18 @@ def send_serial_string(string_data):
         
 
 if __name__ == "__main__":
+    api_url = "http://localhost:5000/api/status"
 
     while True:
-        test_string = "T\n"   
-        send_serial_string(test_string)
-        time.sleep(5)
-        test_string = "F\n"   
-        send_serial_string(test_string)
-        time.sleep(5)
+        response = requests.get(api_url)
+        
+        data = response.json()
+        status = data.get("status")
+        if status == "true":
+            send_serial_string("T\n")
+        elif status == "false":
+            send_serial_string("F\n")
 
-    
+
+        time.sleep(30)
+
