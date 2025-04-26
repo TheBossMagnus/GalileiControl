@@ -3,13 +3,13 @@ import json
 import threading
 
 import bluetooth
-from config import (
-    CONNESSIONI_MASSIME,
-    DIMENSIONE_BUFFER,
-    NOME_DISPOSITIVO_BLUETOOTH,
-    TIMEOUT,
-    UUID_BLUETOOTH,
-)
+
+CONNESSIONI_MASSIME = 5
+DIMENSIONE_BUFFER = 1024
+NOME_DISPOSITIVO_BLUETOOTH = "Galiei Controll Server"
+TIMEOU = 30  # secondi
+UUID_BLUETOOTH = "00001101-0000-1000-8000-00805F9B34FB"  # UUID per RFCOMM
+
 
 # Variabili globali
 connessioni = []
