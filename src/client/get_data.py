@@ -2,6 +2,7 @@ import json
 import os
 import socket
 from typing import Optional
+import time
 
 import psutil
 import requests
@@ -15,8 +16,13 @@ def organizza_dati():
         "temperatura_cpu": get_temperatura_cpu(),
         "connessione_internet": è_connesso_a_internet(),
         "uso_ram": get_uso_ram(),
+        "timestamp": get_data_ora(),
     }
     return json.dumps({"nome_host": get_nome_host(), "dati": dati})
+
+
+def get_data_ora():
+    return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
 
 def get_nome_host():

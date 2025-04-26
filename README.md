@@ -13,7 +13,7 @@ Il componente client raccoglie e invia dati di sistema al server.
   - Utilizzo della RAM
   - Stato della connettività Internet
   - Informazioni su utente e nome host 
- é facilmente estensibile per includere altre metriche, basta aggiungere nuove fuznioni e chiamarle in client.py.
+ é facilmente estensibile per includere altre metriche, basta aggiungere nuove fuznioni.
 
 
 
