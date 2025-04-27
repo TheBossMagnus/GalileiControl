@@ -76,7 +76,7 @@ Inoltre non gli viene assoociato un ip statico, ma viene usato il primo disponib
 
 ## Componente Dashboard
 
-Piccolla dimostrazione di utilizzo dell'api.
+Piccola dimostrazione di utilizzo dell'api.
 La dashboard fornisce un feedback visivo sullo stato del sistema attraverso:
 
 - **dashbordInterface.py**: Interroga l'API e comunica con l'hardware Arduino:
