@@ -1,11 +1,10 @@
-# Progetto Aziendale: **[Titolo del Progetto]**
+# Progetto: Galilei Control
 
 ## Sommario
 - [Obiettivi del Progetto](#obiettivi-del-progetto)
 - [Descrizione del Progetto](#descrizione-del-progetto)
 - [Ruoli e Responsabilità](#ruoli-e-responsabilità)
 - [Timeline del Progetto](#timeline-del-progetto)
-- [Risorse](#risorse)
 - [Rischi e Mitigazioni](#rischi-e-mitigazioni)
 - [Risultati Attesi](#risultati-attesi)
 - [Conclusioni](#conclusioni)
@@ -13,42 +12,38 @@
 ---
 
 ## Obiettivi del Progetto
-- **Obiettivo Principale**: [Descrivere l'obiettivo principale del progetto]
+- **Obiettivo Principale**: Un sistema IOT che permette di monitorare tramite Bluetooth lo stato dei dispositivi, raccogliendo dati utili al personale per la mautenzione e la disgnostica.
 - **Obiettivi Specifici**:
-  1. [Obiettivo specifico 1]
-  2. [Obiettivo specifico 2]
-  3. [Obiettivo specifico 3]
-
-Inserire anche i requisiti iniziali che sono stati posti e/o necessari per il completamento degli obbiettivi.
+  1. Sviuluppare un sistema client-server che permetta di raccogliere, inviare e salvare i dati dei dispositivi.
+  2. Creare un API per l'accesso ai dati raccolti.
+  3. Implementare un sistema di detezione e notifica delle anomalie nei dispositivi, intuitivo e accessibile.
 
 ## Descrizione del Progetto
-[Descrivere il progetto, includendo informazioni dettagliate su cosa si intende realizzare, il contesto e l'importanza per l'azienda.]
+Il progetto prevede un sistema per il monitoraggio di più dispositivi con Bluethooth. Vengono racccolti dati utili come, temperatura della CPU e utilizzo della RAM di un PC windows, e salvati per l’analisi. 
+Vengono individuate le problematiche e notificate, per esmpio tramite un LED verde o rosso. In questo modo si ha un’indicazione immediata sullo stato del sistema.
 
 ## Ruoli e Responsabilità
-| Nome                  | Ruolo                     | Responsabilità                           |
-|-----------------------|---------------------------|--------------------------------------------|
-| [Nome del Membro 1]   | [Ruolo del Membro 1]      | [Descrizione delle responsabilità]         |
-| [Nome del Membro 2]   | [Ruolo del Membro 2]      | [Descrizione delle responsabilità]         |
-| [Nome del Membro 3]   | [Ruolo del Membro 3]      | [Descrizione delle responsabilità]         |
+| Nome                  | Responsabilità                             |
+|-----------------------|--------------------------------------------|
+| Andrea Parolari       | Sviluppo server, documentazione tecnica    |
+| Tommaso Ingiardi      | Sviluppo Client, Presentazione             |
+| Matteo Cambiè         | Sviluppo dashboard, Sviluppo Server        |
+| Riccardo Donato       | Presentazione, Documentazione              |
+
 
 ## Timeline del Progetto
-| Fase                  | Data di Inizio  | Data di Fine  | Stato        |
-|-----------------------|----------------|---------------|--------------|
-| [Fase 1: Analisi]     | [Data]         | [Data]        | [Completata/In Corso] |
-| [Fase 2: Sviluppo]    | [Data]         | [Data]        | [Completata/In Corso] |
-| [Fase 3: Test]        | [Data]         | [Data]        | [Completata/In Corso] |
-| [Fase 4: Consegna]    | [Data]         | [Data]        | [Completata/In Corso] |
+| Fase         | Data di Inizio | Data di Fine | Stato      |
+|--------------|----------------|--------------|------------|
+| Analisi      | 10-03          | 24-03        | Completata |
+| Sviluppo     | 24-03          | 14-04        | Completata |
+| Test         | 14-04          | 26-04        | Completata |
+| Consegna     | 28-04          | 28-04        | Completata |
 
 ## Risorse
-- **Budget**: [Inserire il budget previsto]
-- **Strumenti e Software**: [Elencare gli strumenti e software necessari]
-- **Personale Coinvolto**: [Numero di persone e competenze richieste]
-
-E/o per le presentazioni, inserire le entità coinvolte nella comunicazionie, come avviene lo scambio di informazioni.
-
 - **Hardware**: Rasberry Pi 4, Arduino, client windows
 - **Software**: Python, Arduino sketch
 - **Librerie**: `pybluez`, `flask`, `requests`, `pyserial`
+- **Technologie**: Bluetooth, REST API, JSON, Socket, Arduino sketch
 
 
 ## Rischi e Mitigazioni
@@ -63,12 +58,24 @@ Tutte queste problematiche sono superabili, richiedono però ulteriore lavoro.
 
 
 ## Risultati Attesi
-[Descrivere i risultati attesi al termine del progetto, come metriche di successo o benefici per l'azienda.]
+- **Miglioramento dell'efficienza**: Riduzione dei tempi di diagnosi e manutenzione grazie al monitoraggio in tempo reale.
+- **Affidabilità**: Identificazione tempestiva delle anomalie per prevenire guasti.
+- **Scalabilità**: Possibilità di integrare nuovi dispositivi e funzionalità in futuro.
+- **Facilità d'uso**: Interfaccia intuitiva per il personale tecnico.
 
 ## Problematcihe rimanenti
+Si raccomanda di:
+- Implementare un database per una gestione più efficiente dei dati.
+- Aggiungere misure di sicurezza, come descirtti sopra.
+- Migliorare la validazione e organizzazione dei dati.
 - il server Bluetooth deve essere eseguito con i permessi di amministratore, per limitazioni di pybluez
-- Non viene utilizzato un database vero e proprio, ma un file JSON. Le prestazioni con molti dispositivi potrebbero essere limitate. La gestione dei dati con più server è difficoltosa.
-
 
 ## Conclusioni
-[Inserire un riepilogo finale del progetto, includendo eventuali raccomandazioni per il futuro.]
+Il progetto "Galilei Control" ha dimostrato la fattibilità di un sistema IoT per il monitoraggio e la diagnostica dei dispositivi tramite Bluetooth. Nonostante alcune limitazioni, come l'assenza di un database relazionale e la mancanza di misure di sicurezza avanzate, il sistema offre una base solida per ulteriori sviluppi. 
+
+
+Ipotizziamo questi posssibili sviluppi futuri:
+- Architettura con più server per una copertura più ampia
+- Sistemi di allerta configurabili e intelligenti, possibile uso di intelligenza artificiale
+- Sistema di visualozzazione dei dati più chiaro, con sito web o applicazione
+- Ulteriori funzionalità per il client, come supporto di altri sistemi operativi o controllo remoto
