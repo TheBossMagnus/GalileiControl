@@ -90,7 +90,7 @@ La dashboard fornisce un feedback visivo sullo stato del sistema attraverso:
 ## Flusso dei Dati del Sistema
 
 Il flusso di lavoro completo del sistema segue questa sequenza:
-
+![Diagramma Flusso Dati](DiagrammaFlussoDati.png)
 1. I client raccolgono metriche di sistema (temperatura CPU, utilizzo RAM, connettività Internet)
 2. Questi dati vengono trasmessi al server tramite il protocollo Bluetooth RFCOMM
 3. Il server elabora e memorizza i dati in un database JSON
